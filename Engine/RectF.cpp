@@ -11,7 +11,7 @@ RectF::RectF(float left_in, float right_in, float top_in, float bottom_in)
 
 RectF::RectF(Vec2 top_left, Vec2 bottom_right)
 	:
-	RectF(top_left.y,bottom_right.y,top_left.x,bottom_right.x)
+	RectF(top_left.x,bottom_right.x,top_left.y,bottom_right.y)
 {
 }
 

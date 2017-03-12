@@ -55,8 +55,9 @@ void Game::UpdateModel()
 	if (b.Overlapped() || paddle.ReflectionHandle(b)) {
 		BallReflection.Play();
 	}
-	const Vec2 offset(0.0f,0.0f);
-	int i = 0;
+	if (!n) {
+		const Vec2 offset(0.0f, 0.0f);
+		int i = 0;
 		for (float y = 0; y < nBricksDown; y++) {
 			const Color c = BrickColors[(int)y];
 			for (float x = 0; x < nBricksAcross; x++) {
@@ -64,6 +65,8 @@ void Game::UpdateModel()
 				i++;
 			}
 		}
+		n = true;
+	}
 }
 
 void Game::ComposeFrame()
