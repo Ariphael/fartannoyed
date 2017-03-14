@@ -50,18 +50,19 @@ void Game::UpdateModel()
 			break;
 		}
 	}
-	paddle.Update(wnd.kbd, dt);
+	paddle.Update(wnd.mouse);
 	paddle.Overlapped();
 	if (b.Overlapped() || paddle.ReflectionHandle(b)) {
 		BallReflection.Play();
 	}
 	if (!n) {
-		const Vec2 offset(0.0f, 0.0f);
+		const Vec2 offset(0.0f, 100.0f);
 		int i = 0;
 		for (float y = 0; y < nBricksDown; y++) {
 			const Color c = BrickColors[(int)y];
 			for (float x = 0; x < nBricksAcross; x++) {
 				brick[i] = Brick(RectF(offset + Vec2(x*nBrickWidth, y*nBrickHeight), nBrickWidth, nBrickHeight), c);
+				brick[i].Expand(-5.0f);
 				i++;
 			}
 		}

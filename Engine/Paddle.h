@@ -1,10 +1,10 @@
 #pragma once
 #include "Colors.h"
 #include "Vec2.h"
-#include "Keyboard.h"
 #include "RectF.h"
 #include "Graphics.h"
 #include "Ball.h"
+#include "Mouse.h"
 
 class Paddle
 {
@@ -12,7 +12,7 @@ public:
 	Paddle()=default;
 	Paddle(Vec2 pos,Vec2 vel, Color c);
 	void Draw(Graphics& gfx);
-	void Update(Keyboard &kbd, float dt);
+	void Update(Mouse& mouse);
 	bool ReflectionHandle(Ball &c);
 	bool Overlapped();
 	RectF GetRect();

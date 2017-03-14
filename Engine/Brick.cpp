@@ -32,6 +32,14 @@ void Brick::Draw(Graphics& gfx)
 	}
 }
 
+void Brick::Expand(float n)
+{
+	_brick.bottom += n;
+	_brick.right += n;
+	pos.x -= n;
+	pos.y -= n;
+}
+
 RectF Brick::GetRect()
 {
 	return _brick;

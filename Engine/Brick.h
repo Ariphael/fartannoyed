@@ -10,6 +10,7 @@ public:
 	void Init(RectF brick_in, Color color);
 	bool CollisionHandle(Ball& b);
 	void Draw(Graphics& gfx);
+	void Expand(float n);
 	RectF GetRect();
 private:
 	RectF _brick;

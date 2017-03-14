@@ -28,5 +28,5 @@ RectF RectF::CenInit(Vec2 centre, float halfwidth, float halfheight)
 
 bool RectF::isColliding(RectF & a)
 {
-	return top <= a.top && right >= a.right && left <= a.left && bottom >= a.bottom;
+	return right > a.left && left < a.right && top < a.bottom && bottom > a.top;
 }

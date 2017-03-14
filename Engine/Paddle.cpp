@@ -20,13 +20,10 @@ void Paddle::Draw(Graphics& gfx)
 	}
 }
 
-void Paddle::Update(Keyboard & kbd, float dt)
+void Paddle::Update(Mouse& mouse)
 {
-	if (kbd.KeyIsPressed(VK_LEFT)) {
-		pos.x -= vel.x*dt;
-	}
-	if (kbd.KeyIsPressed(VK_RIGHT)) {
-		pos.x += vel.x*dt;
+	if (mouse.LeftIsPressed()) {
+		pos.x = mouse.GetPosX();
 	}
 }
 

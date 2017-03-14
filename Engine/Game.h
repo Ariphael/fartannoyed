@@ -51,7 +51,7 @@ private:
 	Color BrickColors[5] = { Colors::Red, Colors::Blue, Colors::Yellow, Colors::Magenta, Colors::Green };
 	static constexpr float nBrickWidth = 40.0f;
 	static constexpr float nBrickHeight = 24.0f;
-	static constexpr int nBricksAcross = 11;
+	static constexpr int nBricksAcross = 20;
 	static constexpr int nBricksDown = 5;
 	static constexpr int nBricks = nBricksAcross * nBricksDown;
 	FrameTimer ft;
