@@ -29,6 +29,7 @@
 #include "RectF.h"
 #include "Sound.h"
 #include "Paddle.h"
+#include "Lives.h"
 
 class Game
 {
@@ -60,6 +61,8 @@ private:
 	Paddle paddle;
 	Sound BallReflection;
 	Sound BallDestroy;
+	Lives lives;
 	bool n = false;
+	bool GameOver = false;
 	/********************************/
 };

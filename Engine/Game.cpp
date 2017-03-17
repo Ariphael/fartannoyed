@@ -25,10 +25,11 @@ Game::Game( MainWindow& wnd )
 	:
 	wnd( wnd ),
 	gfx( wnd ),
-	b(Vec2(100.0f,100.0f),Vec2(300.0f,300.0f)),
+	b(Vec2(100.0f,400.0f),Vec2(300.0f,-300.0f)),
 	BallReflection(L"Sounds\\arkpad.wav"),
 	BallDestroy(L"Sounds\\arkbrick.wav"),
-	paddle(Vec2(100,500),Vec2(300.0f,0),Colors::White)
+	paddle(Vec2(100,500),Vec2(300.0f,0),Colors::White),
+	lives(Vec2(0,30))
 {
 }
 
@@ -42,39 +43,48 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-	float dt = ft.Mark();
-	b.Update(dt);
-	for (Brick& a : brick) {
-		if (a.CollisionHandle(b)) {
-			BallDestroy.Play();
-			break;
-		}
-	}
-	paddle.Update(wnd.mouse);
-	paddle.Overlapped();
-	if (b.Overlapped() || paddle.ReflectionHandle(b)) {
-		BallReflection.Play();
-	}
-	if (!n) {
-		const Vec2 offset(0.0f, 100.0f);
-		int i = 0;
-		for (float y = 0; y < nBricksDown; y++) {
-			const Color c = BrickColors[(int)y];
-			for (float x = 0; x < nBricksAcross; x++) {
-				brick[i] = Brick(RectF(offset + Vec2(x*nBrickWidth, y*nBrickHeight), nBrickWidth, nBrickHeight), c);
-				brick[i].Expand(-5.0f);
-				i++;
+	if (!GameOver) {
+		float dt = ft.Mark();
+		b.Update(dt);
+		for (Brick& a : brick) {
+			if (a.CollisionHandle(b)) {
+				BallDestroy.Play();
+				break;
 			}
 		}
-		n = true;
+		paddle.Update(wnd.mouse);
+		paddle.Overlapped();
+		if (b.Overlapped() || paddle.ReflectionHandle(b)) {
+			BallReflection.Play();
+		}
+		if (!n) {
+			const Vec2 offset(0.0f, 100.0f);
+			int i = 0;
+			for (float y = 0; y < nBricksDown; y++) {
+				const Color c = BrickColors[(int)y];
+				for (float x = 0; x < nBricksAcross; x++) {
+					brick[i] = Brick(RectF(offset + Vec2(x*nBrickWidth, y*nBrickHeight), nBrickWidth, nBrickHeight), c);
+					brick[i].Expand(-5.0f);
+					i++;
+				}
+			}
+			n = true;
+		}
+		GameOver = lives.Update(b);
+		lives.DrawIndicator(gfx);
 	}
 }
 
 void Game::ComposeFrame()
 {
-	b.DrawBall(gfx);
-	for (Brick& a : brick) {
-		a.Draw(gfx);
+	if (!GameOver) {
+		b.DrawBall(gfx);
+		for (Brick& a : brick) {
+			a.Draw(gfx);
+		}
+		paddle.Draw(gfx);
 	}
-	paddle.Draw(gfx);
+	else {
+
+	}
 }

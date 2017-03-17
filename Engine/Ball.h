@@ -13,6 +13,7 @@ public:
 	void InvertY();
 	RectF GetRect();
 	Vec2 GetVel();
+	Vec2 GetCen();
 private:
 	static constexpr float radius = 7.0f;
 	Vec2 pos;

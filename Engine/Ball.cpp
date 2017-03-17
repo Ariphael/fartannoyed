@@ -37,12 +37,12 @@ bool Ball::Overlapped()
 	}
 	if (rect.right >= Graphics::ScreenWidth) {
 		over = true;
-		pos.x -= rect.right - Graphics::ScreenWidth;
+		pos.x -= rect.right - Graphics::ScreenWidth+radius*2;
 		InvertX();
 	}
 	if (rect.bottom >= Graphics::ScreenHeight) {
 		over = true;
-		pos.y -= rect.bottom - Graphics::ScreenHeight;
+		pos.y -= rect.bottom - Graphics::ScreenHeight+radius*2;
 		InvertY();
 	}
 	return over;
@@ -66,4 +66,9 @@ RectF Ball::GetRect()
 Vec2 Ball::GetVel()
 {
 	return vel;
+}
+
+Vec2 Ball::GetCen()
+{
+	return Vec2(pos.x+radius,pos.y+radius);
 }

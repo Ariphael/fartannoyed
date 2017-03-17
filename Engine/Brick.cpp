@@ -18,7 +18,44 @@ bool Brick::CollisionHandle(Ball & b)
 {
 	bool collided = false;
 	if (!destroyed && _brick.isColliding(b.GetRect())) {
-		b.InvertY();
+		if (_brick.top < b.GetRect().top && _brick.bottom > b.GetRect().bottom) {
+			b.InvertX();
+		}
+		else if (b.GetRect().top <= _brick.bottom && b.GetRect().left <= _brick.right && b.GetCen().x >= _brick.right) {
+			if (b.GetVel().x < 0) {
+				b.InvertX();
+			}
+			if (b.GetVel().y < 0) {
+				b.InvertY();
+			}
+		}
+		else if (b.GetRect().left <= _brick.right && b.GetRect().bottom >= _brick.top && b.GetCen().x>=_brick.right) {
+			if (b.GetVel().x < 0) {
+				b.InvertX();
+			}
+			if (b.GetVel().y > 0) {
+				b.InvertY();
+			}
+		}
+		else if (b.GetRect().right <= _brick.left && b.GetRect().bottom >= _brick.top && b.GetCen().x <= _brick.left) {
+			if (b.GetVel().x > 0) {
+				b.InvertX();
+			}
+			if (b.GetVel().y > 0) {
+				b.InvertY();
+			}
+		}
+		else if (b.GetRect().top <= _brick.bottom && b.GetRect().right >= _brick.left && b.GetCen().x <= _brick.left) {
+			if (b.GetVel().x > 0) {
+				b.InvertX();
+			}
+			if (b.GetVel().y < 0) {
+				b.InvertY();
+			}
+		}
+		else {
+			b.InvertY();
+		}
 		destroyed = true;
 		collided = true;
 	}
